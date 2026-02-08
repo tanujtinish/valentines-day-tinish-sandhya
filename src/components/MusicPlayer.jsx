@@ -10,7 +10,20 @@ export default function MusicPlayer() {
     audio.volume = 0.4
     audio.currentTime = 30
 
-    const onCanPlay = () => setReady(true)
+    const onCanPlay = () => {
+      setReady(true)
+      audio.play().then(() => {
+        setPlaying(true)
+      }).catch(() => {
+        // Autoplay blocked by browser — wait for first user click anywhere
+        const onClick = () => {
+          audio.currentTime = audio.currentTime < 30 ? 30 : audio.currentTime
+          audio.play().then(() => setPlaying(true)).catch(() => {})
+          document.removeEventListener('click', onClick)
+        }
+        document.addEventListener('click', onClick)
+      })
+    }
     const onEnded = () => {
       audio.currentTime = 30
       audio.play()
