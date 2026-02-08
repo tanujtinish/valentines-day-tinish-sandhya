@@ -10,6 +10,7 @@ import Valentine from './components/Valentine'
 import FloatingHearts from './components/FloatingHearts'
 import CursorHearts from './components/CursorHearts'
 import Navbar from './components/Navbar'
+import MusicPlayer from './components/MusicPlayer'
 import './App.css'
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
     <div className="app">
       <FloatingHearts />
       <CursorHearts />
+      <MusicPlayer />
       <Navbar />
       <Hero />
       <OurStory />
