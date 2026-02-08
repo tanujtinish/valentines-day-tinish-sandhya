@@ -16,10 +16,12 @@ export default function Navbar() {
 
   return (
     <nav className={`navbar ${hidden ? 'hidden' : ''}`}>
-      <a href="#story">Our Story</a>
+      <a href="#story">Story</a>
       <a href="#timeline">Journey</a>
-      <a href="#gallery">Memories</a>
+      <a href="#gallery">Photos</a>
       <a href="#why">Why You</a>
+      <a href="#notes">Notes</a>
+      <a href="#quiz">Quiz</a>
       <a href="#valentine">Valentine</a>
     </nav>
   )
