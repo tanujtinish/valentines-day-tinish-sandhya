@@ -1,50 +1,41 @@
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect, useCallback } from 'react'
 
 export default function MusicPlayer() {
   const audioRef = useRef(null)
   const [playing, setPlaying] = useState(false)
-  const [ready, setReady] = useState(false)
 
-  useEffect(() => {
+  const startMusic = useCallback(() => {
     const audio = audioRef.current
+    if (!audio) return
     audio.volume = 0.4
-    audio.currentTime = 30
+    if (audio.currentTime < 30) audio.currentTime = 30
+    audio.play().then(() => setPlaying(true)).catch(() => {})
+  }, [])
 
-    const onCanPlay = () => {
-      setReady(true)
-      audio.play().then(() => {
-        setPlaying(true)
-      }).catch(() => {
-        // Autoplay blocked by browser — wait for first user click anywhere
-        const onClick = () => {
-          audio.currentTime = audio.currentTime < 30 ? 30 : audio.currentTime
-          audio.play().then(() => setPlaying(true)).catch(() => {})
-          document.removeEventListener('click', onClick)
-        }
-        document.addEventListener('click', onClick)
-      })
-    }
+  // Expose startMusic globally so the splash screen can call it
+  useEffect(() => {
+    window.__startMusic = startMusic
+    const audio = audioRef.current
     const onEnded = () => {
       audio.currentTime = 30
       audio.play()
     }
-    audio.addEventListener('canplaythrough', onCanPlay)
     audio.addEventListener('ended', onEnded)
     return () => {
-      audio.removeEventListener('canplaythrough', onCanPlay)
       audio.removeEventListener('ended', onEnded)
+      delete window.__startMusic
     }
-  }, [])
+  }, [startMusic])
 
   const toggle = () => {
     const audio = audioRef.current
     if (playing) {
       audio.pause()
+      setPlaying(false)
     } else {
-      audio.currentTime = audio.currentTime < 30 ? 30 : audio.currentTime
-      audio.play().catch(() => {})
+      if (audio.currentTime < 30) audio.currentTime = 30
+      audio.play().then(() => setPlaying(true)).catch(() => {})
     }
-    setPlaying(!playing)
   }
 
   return (

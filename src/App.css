@@ -78,6 +78,79 @@
   100% { height: 18px; }
 }
 
+/* ==================== SPLASH SCREEN ==================== */
+.splash {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 5000;
+  background: linear-gradient(135deg, #fff5f5 0%, #ffe0e6 30%, #ffd1dc 60%, #f8c8d4 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.splash-content {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.splash-heart {
+  font-size: 5rem;
+  margin-bottom: 0.5rem;
+}
+
+.splash-title {
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(3rem, 8vw, 5rem);
+  color: #8b2252;
+  line-height: 1.2;
+}
+
+.splash-date {
+  font-family: 'Lato', sans-serif;
+  font-weight: 300;
+  font-size: 1rem;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: #c45e6a;
+}
+
+.splash-btn {
+  margin-top: 1.5rem;
+  padding: 0.9rem 2.5rem;
+  border: 2px solid #c45e6a;
+  border-radius: 30px;
+  background: transparent;
+  color: #c45e6a;
+  font-family: 'Lato', sans-serif;
+  font-size: 1rem;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.splash-btn:hover {
+  background: #c45e6a;
+  color: white;
+}
+
+.splash-hint {
+  font-family: 'Lato', sans-serif;
+  font-size: 0.75rem;
+  color: #b08090;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-top: 0.5rem;
+  opacity: 0.6;
+}
+
 /* ==================== NAVBAR ==================== */
 .navbar {
   position: fixed;

@@ -1,3 +1,6 @@
+import { useState } from 'react'
+import { AnimatePresence } from 'framer-motion'
+import SplashScreen from './components/SplashScreen'
 import Hero from './components/Hero'
 import OurStory from './components/OurStory'
 import Timeline from './components/Timeline'
@@ -14,21 +17,30 @@ import MusicPlayer from './components/MusicPlayer'
 import './App.css'
 
 function App() {
+  const [entered, setEntered] = useState(false)
+
   return (
     <div className="app">
-      <FloatingHearts />
-      <CursorHearts />
       <MusicPlayer />
-      <Navbar />
-      <Hero />
-      <OurStory />
-      <Timeline />
-      <Gallery />
-      <WhyILoveYou />
-      <LoveNotes />
-      <LoveQuiz />
-      <LoveCounter />
-      <Valentine />
+      <AnimatePresence>
+        {!entered && <SplashScreen onEnter={() => setEntered(true)} />}
+      </AnimatePresence>
+      {entered && (
+        <>
+          <FloatingHearts />
+          <CursorHearts />
+          <Navbar />
+          <Hero />
+          <OurStory />
+          <Timeline />
+          <Gallery />
+          <WhyILoveYou />
+          <LoveNotes />
+          <LoveQuiz />
+          <LoveCounter />
+          <Valentine />
+        </>
+      )}
     </div>
   )
 }
